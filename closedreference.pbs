@@ -6,7 +6,7 @@
 #Load modules to run python
 module load eb
 module load Miniconda2
-source deactivate
+source activate qiime1
 # loading virtualenv
 echo "loading virtualenv"
 source activate qiime1
