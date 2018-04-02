@@ -6,13 +6,12 @@
 #Load modules to run python
 module load eb
 module load Miniconda2
-source activate qiime1
 # loading virtualenv
-echo "loading virtualenv"
 source activate qiime1
 # setting temporary directory
 export TMPDIR=~/qiime_tmp
 # picking OTUs
 echo "Picking OTUs with closed reference"
 time pick_closed_reference_otus.py -i slout/seqs.fna -o otus -a -O 16
+# deactivating environment
 source deactivate
