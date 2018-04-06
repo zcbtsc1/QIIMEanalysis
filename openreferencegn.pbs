@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# picking OTUs
+echo "Picking OTUs with open reference silva"
+time pick_open_reference_otus.py -i ~/2018_02_smb/demultiplexing2/seqs.fna  -o ~/2018_02_smb/otusopengn2 -a -O 16
+# deactivating environment
+source deactivate
