@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# ANOSIM using data from open silva for nitrogen
+echo 'ANOSIM for nitrogen from openreference silva'
+time compare_categories.py --method anosim -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/unweighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleNitrogen -o ~/2018_02_smb/statistical_analyses/ANOSIM/anosim_nitrogen_opensilva -n 999
+# deactivating environment
+source deactivate
