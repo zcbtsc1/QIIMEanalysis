@@ -1,0 +1,41 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# PERMDISP using data from open silva for sample depth weighted
+echo 'PERMDISP for sample depth from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleDepth -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_depth_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample moisture weighted
+echo 'PERMDISP for sample moisture from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleMoisture -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_moisture_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample nitrogen weighted
+echo 'PERMDISP for sample nitrogen from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleNitrogen -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_nitrogen_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample phosphorus weighted
+echo 'PERMDISP for sample phosphorus from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePhosphorus -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_phosphorus_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample potassium weighted
+echo 'PERMDISP for sample potassium from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePotassium -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_potassium_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample Ph weighted
+echo 'PERMDISP for sample Ph from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePh -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_Ph_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample vegetation weighted
+echo 'PERMDISP for sample vegetation from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleVegetation -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_vegetation_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample latitude weighted
+echo 'PERMDISP for sample latitude from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleLatitude -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_latitude_opensilva_weighted -n 999
+# PERMDISP using data from open silva for sample longitude weighted
+echo 'PERMDISP for sample longitude from openreference silva weighted'
+time compare_categories.py --method permdisp -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleLongitude -o ~/2018_02_smb/statistical_analyses/PERMDISP/permdisp_longitude_opensilva_weighted -n 999
+# deactivating environment
+source deactivate

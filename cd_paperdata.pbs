@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# core diversity
+echo "Core diversity for closed reference silva 13.2"
+time core_diversity_analyses.py --recover_from_failure \
+-i ~/paperdata/otusclosed2_silva13.2/otu_table.biom \
+-m ~/paperdata/validate_map3/map_merged3.tsv_corrected.txt \
+-t ~/SILVA_132_QIIME_release/trees/97/97_otus.tre \
+-e 641 \
+-o ~/paperdata/cd_closedsilva13.2
+# deactivating environment
+source deactivate

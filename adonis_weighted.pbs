@@ -1,0 +1,35 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# ADONIS using data from open silva for sample depth weighted
+echo 'ADONIS for sample depth from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleDepth -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_depth_opensilva_weighted -n 999
+# ADONIS using data from open silva for sample moisture weighted
+echo 'ADONIS for sample moisture from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleMoisture -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_moisture_opensilva_weighted -n 999
+# ADONIS using data from open silva for sample nitrogen weighted
+echo 'ADONIS for sample nitrogen from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleNitrogen -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_nitrogen_opensilva_weighted -n 999
+# ADONIS using data from open silva for sample Ph weighted
+echo 'ADONIS for sample Ph from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePh -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_Ph_opensilva_weighted -n 999
+# ADONIS using data from open silva for sample phosphorus weighted
+echo 'ADONIS for sample phosphorus from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePhosphorus -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_phosphorus_opensilva_weighted -n 999
+# ADONIS using data from open silva for sample potassium weighted
+echo 'ADONIS for sample potassium from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePotassium -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_potassium_opensilva_weighted -n 999
+# ADONIS using data from open silva for sample vegetation weighted
+echo 'ADONIS for sample vegetation from openreference silva weighted'
+time compare_categories.py --method adonis -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleVegetation -o ~/2018_02_smb/statistical_analyses/ADONIS/adonis_vegetation_opensilva_weighted -n 999
+# deactivating environment
+source deactivate

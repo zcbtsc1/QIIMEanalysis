@@ -1,0 +1,41 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# dbRDA using data from open silva for sample depth weighted
+echo 'db-RDA for sample depth from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleDepth -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_depth_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample moisture weighted
+echo 'dbRDA for sample moisture from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleMoisture -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_moisture_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample nitrogen weighted
+echo 'dbRDA for sample nitrogen from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleNitrogen -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_nitrogen_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample phosphorus weighted
+echo 'dbRDA for sample phosphorus from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePhosphorus -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_phosphorus_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample potassium weighted
+echo 'dbRDA for sample potassium from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePotassium -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_potassium_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample Ph weighted
+echo 'dbRDA for sample Ph from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePh -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_Ph_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample vegetation weighted
+echo 'dbRDA for sample vegetation from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleVegetation -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_vegetation_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample latitude weighted
+echo 'dbRDA for sample latitude from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleLatitude -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_latitude_opensilva_weighted -n 999
+# dbRDA using data from open silva for sample longitude weighted
+echo 'dbRDA for sample longitude from openreference silva weighted'
+time compare_categories.py --method dbrda -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleLongitude -o ~/2018_02_smb/statistical_analyses/dbRDA/dbrda_longitude_opensilva_weighted -n 999
+# deactivating environment
+source deactivate

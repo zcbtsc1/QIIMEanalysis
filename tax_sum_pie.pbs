@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# Plot taxa summary closed silva 13.2
+echo 'plot taxa summmary closed silva 13.2'
+time plot_taxa_summary.py -i ~/2018_02_smb/core_diversity/cd_closedsilva13.2/taxa_plots/table_mc36070_sorted_L2.txt \
+-l Phylum -c pie -o ~/2018_02_smb/tax_summ_pie_cs13.2/
+# deactivating environment
+source deactivate

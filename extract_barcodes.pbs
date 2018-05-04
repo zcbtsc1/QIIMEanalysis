@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# extract barcodes
+echo 'extract barcodes'
+time extract_barcodes.py -f ~/paperdata/data/paperdata.fastq.gz -o ~/paperdata/barcodes/
+# deactivating environment
+source deactivate

@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# Making distance matrix boxplot vegetation
+echo 'making distance matrix boxplot vegetation'
+time make_distance_boxplots.py -m ~/2018_02_smb/map_complete.tsv \
+-d ~/2018_02_smb/core_diversity_cd_opensilva2/bdiv_even38856/weighted_unifrac_dm.txt \
+-f "SampleVegetation" \
+--save_raw_data \
+-n 999 \
+--box_color "blue" \
+--sort median \
+-o ~/2018_02_smb/distance_boxplot_vegetation/
+# deactivating environment
+source deactivate

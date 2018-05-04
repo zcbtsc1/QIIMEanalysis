@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# quality fitering of gra1_smallpark
+echo 'quality filtering of paperdata'
+time split_libraries_fastq.py -i 31.5.fastq.gz,32.5.fastq.gz,33.5.fastq.gz,34.5.fastq.gz,35.5.fastq.gz,36.5.fastq.gz,37.5.fastq.gz,38.5.fastq.gz,39.5.fastq.gz,40.5.fastq.gz,41.5.fastq.gz,42.5.fastq.gz,43.5.fastq.gz,44.5.fastq.gz,45.5.fastq.gz,46.5.fastq.gz,47.5.fastq.gz,48.5.fastq.gz,49.5.fastq.gz,50.5.fastq.gz,51.5.fastq.gz,52.5.fastq.gz,53.5.fastq.gz,54.5.fastq.gz,55.5.fastq.gz,56.5.fastq.gz,57.5.fastq.gz,58.5.fastq.gz,59.5.fastq.gz,60.5.fastq.gz \
+--sample_ids 31.5,32.5,33.5,34.5.,35.5,36.5,37.5,38.5,39.5,40.5.,41.5,42.5,43.5,44.5.,45.5,46.5.,47.5,48.5,49.5,50.5,51.5,52.5,53.5,54.5,55.5,56.5,57.5,58.5,59.5,60.5 \
+-m ~/paperdata2/validate_map/map_merged4.tsv_corrected.txt \
+-o ~/paperdata2/qualityfiltering -q 19 --barcode_type 'not-barcoded'
+# deactivating environment
+source deactivate

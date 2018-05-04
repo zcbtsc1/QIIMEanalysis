@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# compare distance matrices
+echo 'compare distance matrices weighted unifrac and population density'
+time compare_distance_matrices.py --method mantel \
+-i ~/paperdata2/cd_closedsilva13.2_chimera/bdiv_even8443/weighted_unifrac_dm.txt,~/paperdata2/map_distance_matrix_population.txt \
+-o mantel_out -n 999
+# deactivating environment
+source deactivate

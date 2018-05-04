@@ -1,0 +1,42 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# ADONIS using data from closed silva for sample moisture weighted
+echo 'ADONIS for sample moisture from closed silva weighted'
+time compare_categories.py --method adonis \
+-i ~/2018_02_smb/cd_closedsilva13.2_chimera/bdiv_even36064/weighted_unifrac_dm.txt \
+-m ~/2018_02_smb/map_complete.tsv -c SampleMoisture \
+-o ~/2018_02_smb/ADONIS_chimera/weighted/adonis_moisture_weighted -n 999
+# ADONIS using data from closed silva for sample Ph weighted
+echo 'ADONIS for sample Ph from closed silva weighted'
+time compare_categories.py --method adonis \
+-i ~/2018_02_smb/cd_closedsilva13.2_chimera/bdiv_even36064/weighted_unifrac_dm.txt \
+-m ~/2018_02_smb/map_complete.tsv -c SamplePh \
+-o ~/2018_02_smb/ADONIS_chimera/weighted/adonis_Ph_weighted -n 999
+# ADONIS using data from closed silva for sample potassium weighted
+echo 'ADONIS for sample potassium closed silva weighted'
+time compare_categories.py --method adonis \
+-i ~/2018_02_smb/cd_closedsilva13.2_chimera/bdiv_even36064/weighted_unifrac_dm.txt \
+-m ~/2018_02_smb/map_complete.tsv -c SamplePotassium \
+-o ~/2018_02_smb/ADONIS_chimera/weighted/adonis_Potassium_weighted -n 999
+# ADONIS using data from closed silva for sample phosphorus weighted
+echo 'ADONIS for sample phosphorus from closed silva weighted'
+time compare_categories.py --method adonis \
+-i ~/2018_02_smb/cd_closedsilva13.2_chimera/bdiv_even36064/weighted_unifrac_dm.txt \
+-m ~/2018_02_smb/map_complete.tsv -c SamplePhosphorus \
+-o ~/2018_02_smb/ADONIS_chimera/weighted/adonis_Phosphorus_weighted -n 999
+# ADONIS using data from closed silva for sample nitrogen weighted
+echo 'ADONIS for sample nitrogen from closed silva weighted'
+time compare_categories.py --method adonis \
+-i ~/2018_02_smb/cd_closedsilva13.2_chimera/bdiv_even36064/weighted_unifrac_dm.txt \
+-m ~/2018_02_smb/map_complete.tsv -c SampleNitrogen \
+-o ~/2018_02_smb/ADONIS_chimera/weighted/adonis_nitrogen_weighted -n 999

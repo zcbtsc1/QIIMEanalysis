@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# core microbiome
+echo 'Identify the core microbiome closed silva 13.2'
+time compute_core_microbiome.py -i ~/2018_02_smb/OTUS/otusclosed_silva13.2/otu_table.biom \
+-o ~/2018_02_smb/core_microbiome/otu_table_core_closedsilva13.2
+# deactivating environment
+source deactivate

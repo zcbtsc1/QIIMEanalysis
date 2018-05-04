@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# PERMANOVA using data from open silva for sample depth weighted
+echo 'PERMANOVA for sample depth from openreference silva weighted'
+time compare_categories.py --method permanova -i ~/paperdata2/cd_closedsilva13.2/bdiv_even8476/weighted_unifrac_dm.txt \
+-m ~/paperdata2/validate_map/map_merged4.tsv_corrected.txt \
+-c PopulationDensity -o ~/paperdata2/statistical_analysis/permanova_population_weighted -n 999
+# deactivating environment
+source deactivate

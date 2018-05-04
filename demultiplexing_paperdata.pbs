@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# Demultiplexing
+echo "split libraries"
+time split_libraries_fastq.py -m ~/paperdata/validate_map/map_merged.tsv_corrected.txt  \
+-i ~/paperdata/data/merged.fastq.gz \
+-b merged_barcodes.fastq \
+--rev_comp_mapping_barcodes --rev_comp_barcode --barcode_type 12 -q 19 -o ~/paperdata/demultiplexing
+# deactivating environment
+source deactivate

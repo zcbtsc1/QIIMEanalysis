@@ -1,0 +1,26 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+module load R
+# Morans  using data from open silva for sample depth weighted
+echo 'Morans  for sample depth from openreference silva weighted'
+time compare_categories.py --method morans_i -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleDepth -o ~/2018_02_smb/statistical_analyses/MORANS_i/morans_depth_opensilva_weighted -n 999
+# Morans  using data from open silva for sample latitude weighted
+echo 'Morans  for sample latitude from openreference silva weighted'
+time compare_categories.py --method morans_i -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleLatitude -o ~/2018_02_smb/statistical_analyses/MORANS_i/morans_latitude_opensilva_weighted -n 999
+# Morans  using data from open silva for sample longitude weighted
+echo 'Morans  for sample longitude from openreference silva weighted'
+time compare_categories.py --method morans_i -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SampleLongitude -o ~/2018_02_smb/statistical_analyses/MORANS_i/morans_longitude_opensilva_weighted -n 999
+# Morans  using data from open silva for sample Ph weighted
+echo 'Morans  for sample Ph from openreference silva weighted'
+time compare_categories.py --method morans_i -i ~/2018_02_smb/core_diversity/cd_opensilva/bdiv_even745/weighted_unifrac_dm.txt -m ~/2018_02_smb/map_complete.tsv -c SamplePh -o ~/2018_02_smb/statistical_analyses/MORANS_i/morans_Ph_opensilva_weighted -n 999
+# deactivating environment
+source deactivate
