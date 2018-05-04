@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# NMDS unweighted chimeras
+echo 'NMDS unweighted chimeras'
+time nmds.py  -i ~/paperdata2/cd_closedsilva13.2_chimera/bdiv_even8443/unweighted_unifrac_dm.txt \
+-o ~/paperdata2/nmds_unweighted
+# deactivating environment
+source deactivate

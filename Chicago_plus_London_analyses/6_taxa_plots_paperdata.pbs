@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules to run python
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# summarise taxa through plots
+echo 'summarise taxa through plots'
+time summarize_taxa_through_plots.py -i ~/paperdata2/otusclosed_silva13.2/otu_table.biom \
+-m ~/paperdata2/validate_map6/map_merged6.tsv_corrected.txt \
+-c Location -o ~/paperdata2/taxa_plots_location/
+# summarise taxa through plots
+echo 'summarise taxa through plots'
+time summarize_taxa_through_plots.py -i ~/paperdata2/otusclosed_silva13.2/otu_table.biom \
+-m ~/paperdata2/validate_map6/map_merged6.tsv_corrected.txt \
+-c Population -o ~/paperdata2/taxa_plots_population/
+# deactivating environment
+source deactivate
